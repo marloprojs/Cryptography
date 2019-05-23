@@ -17,7 +17,8 @@ int Encrypter::caesarCipher(string plainText, int shift)
 	cout<<int(hello1[0])<<" "<<(char)part<<endl;
 	return 0;*/
 	int asciiVal;
-
+	string cipherText = "";
+	char convertChar;
 
 	for(char &currChar : plainText)
 	{
@@ -26,10 +27,14 @@ int Encrypter::caesarCipher(string plainText, int shift)
 		{
 			asciiVal -= 97;
 			asciiVal += shift%26;
-			currChar = (char) asciiVal;
+			asciiVal += 97;
+			convertChar = char(asciiVal);
+			//cout<<convertChar<<endl;
+			cipherText += convertChar;
 		}
 		//currChar = (int(currChar) + shift)%26
 	}
+	cout<< cipherText<<endl;
 	return 0;
 
 }
