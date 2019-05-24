@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <utility>
 #include <vector>
+#include <ctype.h>
 
 using namespace std;
 
@@ -12,29 +13,46 @@ using namespace std;
 // in a consistent direction. For example, if your shift = +3, then abc -> def.
 int Encrypter::caesarCipher(string plainText, int shift)
 {
-	/*string hello1 = "please";
-	int part = int(hello1[0]);
-	cout<<int(hello1[0])<<" "<<(char)part<<endl;
-	return 0;*/
 	int asciiVal;
-	string cipherText = "";
 	char convertChar;
+	string cipherText = "";
+	int i = 0;
 
-	for(char &currChar : plainText)
+	//Loop through the string
+	for(i=0; i<plainText.length(); i++)
 	{
-		asciiVal = int(currChar);
-		if(asciiVal >= 97)
+		asciiVal = int(plainText[i]);
+
+		//If they are lowercase letters
+		if(asciiVal >= 97 && asciiVal <=122)
 		{
 			asciiVal -= 97;
 			asciiVal += shift%26;
 			asciiVal += 97;
 			convertChar = char(asciiVal);
-			//cout<<convertChar<<endl;
 			cipherText += convertChar;
 		}
-		//currChar = (int(currChar) + shift)%26
+
+		//If they are uppercase letters
+		if(asciiVal >= 65 && asciiVal <= 90)
+		{
+			asciiVal -= 97;
+			asciiVal += shift%26;
+			asciiVal += 97;
+			convertChar = char(asciiVal);
+			cipherText += convertChar;
+		}
+
+		//If it's not a letter
+		if(!isalpha(plainText.at(i)))
+			{
+				cipherText += plainText.at(i);
+			}
 	}
 	cout<< cipherText<<endl;
+
+
+
 	return 0;
 
 }
