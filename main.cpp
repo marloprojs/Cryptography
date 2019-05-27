@@ -7,5 +7,5 @@ using namespace std;
 int main()
 {
 	Encrypter network;
-	network.caesarCipher("hello world", 3); 
+	network.caesarCipher("Hello world!", 3); 
 }

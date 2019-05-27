@@ -36,9 +36,9 @@ int Encrypter::caesarCipher(string plainText, int shift)
 		//If they are uppercase letters
 		if(asciiVal >= 65 && asciiVal <= 90)
 		{
-			asciiVal -= 97;
+			asciiVal -= 65;
 			asciiVal += shift%26;
-			asciiVal += 97;
+			asciiVal += 65;
 			convertChar = char(asciiVal);
 			cipherText += convertChar;
 		}
@@ -50,9 +50,12 @@ int Encrypter::caesarCipher(string plainText, int shift)
 			}
 	}
 	cout<< cipherText<<endl;
-
-
-
 	return 0;
+}
 
+// Triple Data Encryption Algorithm is a symetric key block cipher. 
+// Cipher text = E_K3(D_K2(E_K3(plaintext)))
+int Encrypter::tripleDES(string plainText, int K1, int K2, int K3)
+{
+	
 }
