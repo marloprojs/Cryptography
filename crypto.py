@@ -32,6 +32,19 @@ def ElGammal(p, g, a, b, m):
 	ciphertext = (key*m)%p
 	return ciphertext
 
+def extEucl(a, b):
+	#au + bv = gcd(a, b)
+	u1, v1 = 0
+	u1, v0 = 1
+
+	while a != 0:
+		(q, a) = divmod(b, a)
+		b = a 
+		v_0 = v_1
+		v_1 = v_0 - q*v_1
+		u_0 = u_1
+
+	return (u_0, v_0)
 
 #In order to decrypt ElGammal, you must find the inverse of the common key and multiply the inverse and ciphertexts
 def decryptEG(p, key, c):
@@ -42,4 +55,4 @@ def decryptEG(p, key, c):
 		inverse = FPA(key, p-2, p)
 	#If FlT is not applicable to find the inverse, then use the Extended Euclidean Algorithm
 	else:
-		
+
