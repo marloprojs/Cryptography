@@ -1,6 +1,5 @@
 #This encrypter has three different cryptosystems (ElGammal, RSA, Goldwasser-Micali)
-# and a public key exchange system (Diffie-Hellman). All of the pure math details are 
-#included in the ReadMe.
+# and a public key exchange system (Diffie-Hellman).
 
 # Fast powering algorithm utilizes successive squaring
 def FPA(g, n, p):
@@ -32,19 +31,27 @@ def ElGammal(p, g, a, b, m):
 	ciphertext = (key*m)%p
 	return ciphertext
 
+# Reference: https://en.wikibooks.org/wiki/Algorithm_Implementation/Mathematics/Extended_Euclidean_algorithm
 def extEucl(a, b):
 	#au + bv = gcd(a, b)
-	u1, v1 = 0
-	u1, v0 = 1
+	u0 = 0
+	u1 = 1 
+	v0 = 1
+	v1 = 0
+	temp = 0
 
 	while a != 0:
+		temp = a
 		(q, a) = divmod(b, a)
-		b = a 
-		v_0 = v_1
-		v_1 = v_0 - q*v_1
-		u_0 = u_1
+		b = temp
+		temp = v0
+		v0 = v1
+		v1 = temp - (q*v1)
+		temp = u0
+		u0 = u1
+		u1 = temp - (q*u1)
 
-	return (u_0, v_0)
+	return (u0, v0)
 
 #In order to decrypt ElGammal, you must find the inverse of the common key and multiply the inverse and ciphertexts
 def decryptEG(p, key, c):
@@ -55,4 +62,10 @@ def decryptEG(p, key, c):
 		inverse = FPA(key, p-2, p)
 	#If FlT is not applicable to find the inverse, then use the Extended Euclidean Algorithm
 	else:
+		# Double check if this checks out for if a>b and b>a
+		printf("here")
+		(a, b) = extEucl(p, key)
+		inverse = a
+	return inverse
+
 
